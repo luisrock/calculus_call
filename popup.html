@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPT</title>
+  <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css">
+  <link rel="stylesheet" href="css/clc.css">
+  <script src="js/jquery.js"></script>
+  <script src="js/clipboard.min.js"></script>
+  <script src="js/toggle.js"></script>
+
+</head>
+
+<body>
+  <div id="main">
+
+    <div class="row flex-center row-title">
+      <div class="text-center">
+        <h1>Calculus Call</h1>
+      </div>
+    </div>
+
+
+
+    <div class="row flex-center child-borders row-buttons">
+      <button class="paper-btn margin btn-small" id="btn-average">Average</button>
+      <button class="paper-btn margin btn-small" id="btn-rule">Rule of 3</button>
+      <button class="paper-btn margin btn-small" id="btn-percentage">Percentage</button>
+    </div>
+
+
+    <div id="average">
+      <div class="paper container" id="calculo-average">
+
+        <form id="average" action="">
+          <div class="row">
+            <div class="col sm-8">
+              <div class="form-group">
+                <input class="input-block" type="text" name="values" id="values" style="letter-spacing: 2px;"
+                  placeholder="Ex: 8, 7, 9.3, 10:2">
+                <span style="display:block; font-size:0.8em;letter-spacing: 1px;padding: 2px;">
+                  <ol>
+                    <li>
+                      Separate values with<code>,</code>
+                    </li>
+                    <li>
+                      Use<code>.</code>for decimals
+                    </li>
+                    <li>
+                      Use<code>:</code>for weight ≠ 1
+                    </li>
+                  </ol>
+                </span>
+              </div>
+            </div>
+            <div class="col sm-4">
+              <div class="form-group" style="display: flex; align-items: center;">
+                <label for="limita" class="paper-check label-limita">
+                  <input type="checkbox" name="limita" id="limita" value="1" checked>
+                  <span>
+                    Limit result to 2 decimal places
+                  </span>
+                </label>
+                <input type="submit" id="send-values" class="paper-btn btn-secondary btn-small" value="Go!" disabled="">
+              </div>
+
+            </div> <!-- end col -->
+          </div> <!-- end row -->
+
+          <div class="row row-average-result">
+            <div class="col md-12 col-average-result">
+              <div class="col-fill col border border-success" id="result-field" style="display: none;">
+                Average: &nbsp;
+                <span id="result-average" style="letter-spacing: 2px; text-align:left">
+                  <!-- js here -->
+                </span>
+              </div>
+              <div class="conta-average-clean">
+                <code id="conta-average" style="display: none;">
+                <!-- js here -->
+              </code>
+                <button type="button" class="btn-small" id="btn-copy-result" data-clipboard-target="#result-average"
+                  style="display: none; float:right;">
+                  Copy result
+                </button>
+              </div>
+            </div> <!-- end col -->
+
+
+          </div> <!-- end row -->
+        </form>
+
+      </div> <!-- end container -->
+    </div> <!-- end average -->
+
+    <div id="rule">
+      <div class="paper container" id="calculo-rule">
+
+        <div class="row" style="display:flex; justify-content:space-evenly">
+          <input class="input-block" type="text" name="value1" id="value1" style="letter-spacing: 2px;">
+          <span class='esta-para'> &rarr; </span>
+          <input class="input-block" type="text" name="value2" id="value2" style="letter-spacing: 2px;">
+        </div>
+
+        <div class="row" style="display:flex; justify-content:space-evenly">
+          <input class="input-block" type="text" name="value3" id="value3" style="letter-spacing: 2px;">
+          <span class='esta-para'> &rarr; </span>
+          <input class="input-block" type="text" name="value4" id="value4" style="letter-spacing: 2px;">
+        </div>
+
+
+        <div class="row-limita-clean">
+          <label for="limita-rule" class="paper-check label-limita">
+            <div class="row-limita-clean">
+              <input type="checkbox" name="limita-rule" id="limita-rule" value="1" style="margin-right: 10px;" checked>
+              <span>
+                Limit result to 2 decimal places
+              </span>
+            </div>
+          </label>
+          <button type="button" class="btn-small" id="btn-clean" style="float: left;">Clean fields</button>
+        </div>
+
+
+
+        <div id="row-conta-rule" style="display:none;">
+          <code id="conta-rule">
+              <!-- js here -->
+            </code>
+          <button type="button" class="btn-small" id="btn-copy-result-rule" data-clipboard-target=".background-success">
+            Copy result
+          </button>
+        </div>
+
+      </div>
+    </div> <!-- end rule -->
+
+
+    <div id="percentage">
+      <div class="paper container" id="calculo-percentage">
+
+        <div class="row row-percentage">
+          <span>What is </span>
+          <input class="input-block input-percentage" type="text" name="value1">
+          <span> % of </span>
+          <input class="input-block" type="text" name="value2">
+          <span>? </span>
+          <input class="input-block input-go paper-btn btn-secondary btn-small" type="submit" value="go!"
+            data-operation="first">
+        </div>
+
+        <div class="row row-percentage">
+          <input class="input-block input-percentage" type="text" name="value1" style="letter-spacing: 2px; width:50px">
+          <span> is what % of </span>
+          <input class="input-block" type="text" name="value2">
+          <span>? </span>
+          <input class="input-block input-go paper-btn btn-secondary btn-small" type="submit" value="go!"
+            data-operation="second">
+        </div>
+
+        <div class="row row-percentage">
+          <input class="input-block" type="text" name="value1">
+          <span> is </span>
+          <input class="input-block input-percentage" type="text" name="value2">
+          <span> % of what? </span>
+          <input class="input-block input-go paper-btn btn-secondary btn-small" type="submit" value="go!"
+            data-operation="third">
+        </div>
+
+        <div class="row row-percentage">
+          <span>From </span>
+          <input class="input-block" type="text" name="value1">
+          <span> to </span>
+          <input class="input-block" type="text" name="value2">
+          <span> is what %? </span>
+          <input class="input-block input-go paper-btn btn-secondary btn-small" type="submit" value="go!"
+            data-operation="fourth">
+        </div>
+
+        <div class="row row-percentage">
+          <fieldset class="form-group">
+            <label for="limita-percentage" class="paper-check label-limita">
+              <input type="checkbox" name="limita-percentage" id="limita-percentage" value="1" checked>
+              <span>
+                Limit result to 2 decimal places (and go again)
+              </span>
+            </label>
+          </fieldset>
+        </div>
+
+        <div class="row row-percentage-result">
+          <div class="col md-12 col-percentage-result">
+            <div class="col-fill col border border-success" id="percentage-result-field">
+              Result: &nbsp;
+              <span id="result-percentage">
+                <!-- js here -->
+              </span>
+            </div>
+
+            <!-- <div id="conta-percentage" style="font-size: 0.8em; padding: 1px;"></div> -->
+            <button type="button" class="btn-small" id="btn-copy-result-percentage"
+              data-clipboard-target="#result-percentage" style="float: right;">
+              Copy result
+            </button>
+          </div> <!-- end col -->
+        </div>
+
+
+      </div>
+    </div> <!-- end percentage -->
+
+  </div> <!-- end main -->
+
+
+</body>
+
+</html>
